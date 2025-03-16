@@ -27,7 +27,7 @@ public class UserPasswordController {
      * 비밀번호 변경 API (Access Token 검증 후 변경)
      */
     @Operation(summary = "비밀번호 변경 API (Access 토큰 필요)")
-    @PostMapping("/passwordupdate")
+    @PostMapping("/pw-update")
     public ResponseEntity<ApiResponseTemplete<String>> changePassword(
             HttpServletRequest request, @RequestBody UserPasswordDto userPasswordDto) {
         // 요청 헤더에서 Access Token 추출
@@ -89,7 +89,7 @@ public class UserPasswordController {
      * 비밀번호 초기화 (임시 비밀번호 이메일 전송)
      */
     @Operation(summary = "임시 비밀번호 전송 API (토큰 인증 불필요)", security = @SecurityRequirement(name = ""))
-    @PostMapping("/reset-password")
+    @PostMapping("/pw-reset")
     public ResponseEntity<ApiResponseTemplete<String>> resetPassword(@RequestBody UserPasswordDto.UserPasswordResetDto dto) {
         try {
             boolean isReset = passwordService.resetPassword(dto.getEmail(), dto.getUserName());
