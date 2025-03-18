@@ -77,7 +77,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                         // Token 인증이 필요없는 API들을 추가하는 부분
                         .requestMatchers("/api/sign-up", "/api/check/email", "/api/check/nickname", "/api/login",
                                 "/api/verify/email", "/api/verify/resend", "/api/verify/reset-password",
-                                "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**")
+                                "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**","/login/**")
                         .permitAll() // 특정 요청 허용
                         .anyRequest().authenticated() // 나머지 요청은 인증 필요
                 )
