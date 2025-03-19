@@ -75,7 +75,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 .httpBasic(AbstractHttpConfigurer::disable) // 기본 인증 비활성화
                 .authorizeHttpRequests(auth -> auth
                         // Token 인증이 필요없는 API들을 추가하는 부분
-                        .requestMatchers("/api/sign-up", "/api/check/email", "/api/check/nickname", "/api/login",
+                        .requestMatchers("/api/sign-up", "/api/check/email", "/api/check/nickname", "/api/login/**",
                                 "/api/verify/email", "/api/verify/resend", "/api/verify/reset-password",
                                 "/swagger-ui.html", "/v3/api-docs/**", "/swagger-ui/**","/login/**")
                         .permitAll() // 특정 요청 허용

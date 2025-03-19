@@ -11,7 +11,7 @@ spring:
     show-sql: true
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -42,4 +42,6 @@ oauth2:
     redirect-uri: http://localhost:8080/login/oauth2/code/google
     token-uri: https://oauth2.googleapis.com/token
     resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
+    auth-uri: https://accounts.google.com/o/oauth2/auth?access_type=offline
+
 

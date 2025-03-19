@@ -1,5 +1,6 @@
 package com.solutionChallenge.demo.app.service;
 
+import com.solutionChallenge.demo.app.domain.Provider;
 import com.solutionChallenge.demo.app.domain.RoleType;
 import com.solutionChallenge.demo.app.domain.User;
 import com.solutionChallenge.demo.app.dto.UserSignUpDto;
@@ -75,6 +76,8 @@ public class SignUpService {
                 .userNickName(userSignUpDto.getUserNickName().trim())
                 .roleType(RoleType.USER)
                 .emailVerified(false)
+                .provider(Provider.NORMAL)
+                .providerId(null)
                 .build();
         return userRepository.save(user);
     }
