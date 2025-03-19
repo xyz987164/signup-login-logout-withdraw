@@ -12,18 +12,27 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class UserLoginController {
+
+
+    @Value("${oauth2.google.client-id}")
+    private String clientId;
+
+    @Value("${oauth2.google.redirect-uri}")
+    private String redirectUri;
+
+    private static final String AUTH_URL = "https://accounts.google.com/o/oauth2/auth";
+
 
     private final LoginService loginService;
     private final TokenService tokenService;
@@ -144,5 +153,18 @@ public class UserLoginController {
                         .data(null)
                         .build()
         );
+    }
+
+    @GetMapping("/login/google")
+    public RedirectView redirectToGoogle() {
+        // 올바른 scope 설정
+        String scope = "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile";
+        String responseType = "code";
+
+        // access_type=offline은 별도의 파라미터로 추가
+        String url = String.format("%s?client_id=%s&redirect_uri=%s&response_type=%s&scope=%s&access_type=offline",
+                AUTH_URL, clientId, redirectUri, responseType, scope);
+
+        return new RedirectView(url);
     }
 }
