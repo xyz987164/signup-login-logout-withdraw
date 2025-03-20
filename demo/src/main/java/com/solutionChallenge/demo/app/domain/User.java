@@ -37,6 +37,14 @@ public class User {
     @Column(nullable = false)
     private boolean emailVerified = false;
 
+    @Enumerated(EnumType.STRING) // ENUM 사용
+    @Column(nullable = false)
+    private Provider provider;  // "Google", "Normal"
+
+    @Column(nullable = true, unique = true)
+    private String providerId;  // OAuth2 제공자의 고유 ID (일반 회원가입은 NULL)
+
+
     // 이메일 인증 여부 반환
     public Boolean getEmailVerified() { return emailVerified; }
     // 이메일 인증 여부 설정
@@ -55,7 +63,7 @@ public class User {
                 String email, String password,
                 String userName, String userNickName,
                 String refreshToken, Boolean emailVerified,
-                RoleType roleType) {
+                RoleType roleType, Provider provider, String providerId) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -64,5 +72,7 @@ public class User {
         this.refreshToken = refreshToken;
         this.emailVerified = emailVerified;
         this.roleType = roleType;
+        this.provider = provider;
+        this.providerId = providerId;
     }
 }

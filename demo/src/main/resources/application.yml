@@ -11,7 +11,7 @@ spring:
     show-sql: true
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -33,3 +33,15 @@ spring:
           timeout: 5000
           writetimeout: 5000
     auth-code-expiration-millis: ${MAIL_EXPTIME}
+
+
+oauth2:
+  google:
+    client-id: 659542911798-hchnvea7l0otef54s9nu8tavdbcqfbq8.apps.googleusercontent.com
+    client-secret: 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
+    redirect-uri: http://localhost:8080/login/oauth2/code/google
+    token-uri: https://oauth2.googleapis.com/token
+    resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
+    auth-uri: https://accounts.google.com/o/oauth2/auth?access_type=offline
+
+
