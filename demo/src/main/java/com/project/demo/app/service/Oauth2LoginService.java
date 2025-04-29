@@ -28,15 +28,13 @@ public class Oauth2LoginService {
     public Oauth2LoginService(Environment env) {
         this.env = env;
     }*/
+
+
     public User socialLogin(String code, String registrationId) {
         JsonNode tokenResponse = getTokenResponse(code, registrationId);
         System.out.println(tokenResponse);// 전체 응답 가져옴
         String accessToken = tokenResponse.get("access_token").asText();
-        //JsonNode userResourceNode = getUserResource(accessToken, registrationId);
         String refreshToken = tokenResponse.has("refresh_token") ? tokenResponse.get("refresh_token").asText() : null;
-        // String refreshToken = getTokenResponse().has("refresh_token") ? getTokenResponse().get("refresh_token").asText() : null;
-        // System.out.println("userResourceNode = " + userResourceNode);
-
         JsonNode userResourceNode = getUserResource(accessToken, registrationId);
         String id = userResourceNode.get("id").asText();
         String email = userResourceNode.get("email").asText();
@@ -70,10 +68,10 @@ public class Oauth2LoginService {
         return accessTokenNode.get("access_token").asText();*/
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
 
-        // 🔹 Google OAuth2 서버로 요청을 보내서 응답 받기
+        // Google OAuth2 서버로 요청을 보내서 응답 받기
         ResponseEntity<JsonNode> responseNode = restTemplate.exchange(tokenUri, HttpMethod.POST, entity, JsonNode.class);
 
-        // 🔹 전체 응답을 반환
+        // 전체 응답을 반환
         return responseNode.getBody();
     }
 

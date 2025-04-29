@@ -11,7 +11,7 @@ spring:
     show-sql: true
     database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
@@ -37,8 +37,8 @@ spring:
 
 oauth2:
   google:
-    client-id: 659542911798-hchnvea7l0otef54s9nu8tavdbcqfbq8.apps.googleusercontent.com
-    client-secret: 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
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
     redirect-uri: http://localhost:8080/login/oauth2/code/google
     token-uri: https://oauth2.googleapis.com/token
     resource-uri: https://www.googleapis.com/oauth2/v2/userinfo
