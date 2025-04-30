@@ -25,7 +25,7 @@ public class User {
     private String userName;
 
     @Setter
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String userNickName;
 
     private String refreshToken;
